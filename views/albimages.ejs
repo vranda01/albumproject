@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/css/albumimage.css">
+</head>
+
+<body style="background-color:#ff9999;">
+  <ul>
+    <li><a class="active" href="/useralbum">Home</a></li>
+    <li><a href="/profile"> Profile</a></li>
+    <li><a href="/updateprofile"> Update Profile</a></li>
+    <li><a href="/useralbum">Albums</a></li>
+    <li><a href="/logout">Logout</a></li>
+    <li class="right"><a href="/profile"><%= fname%> <%= lname%></a></li>
+  </ul> <br><br><br>
+  <% images.forEach(function(image){ %>
+  <div class="column">
+    <img src=<%= hostname+image.image %> style="width:100%;" >
+  </div>
+  <%})%>
+  <form action="/addimage/<%= album_id %>" method="post" enctype="multipart/form-data">
+    <input type="file" name="picture" id="myFileInput" required />
+    <center> <button onclick="document.getElementById('myFileInput').click()">
+        <img src="/images/plus1.png" height=150 width=150 > </button>
+      <br>
+
+  </form>
+
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/albums.css">
+        <link rel="stylesheet" type="text/css" href="/css/profile.css">
+    </head>
+    <body>
+    <ul>
+      <li><a class="active" href="/useralbum">Home</a></li>
+      <li><a href="/profile"> Profile</a></li>
+      <li><a href="/updateprofile"> Update Profile</a></li>
+      <li><a href="/useralbum">Albums</a></li>
+      <li><a href="/logout">Logout</a></li>
+      <li class="right"><a href="#"><%= fname%> <%= lname%></a></li>
+    </ul>
+    <div class="registerbox">
+        <h1><i>Profile Details</i> </h1>
+        <hr>
+        <p> First Name : <%=fname%> </p>
+        <hr>
+        <p> Last Name : <%=lname%> </p>
+         <hr>
+        <p> Email id : <%=email%> </p>
+        <hr>
+        <p> Birthdate : <%=dob=dob.substring(0,10)%> </p>
+         <hr>
+        <p> Contact no: <%=con%> </p>
+     </div>   
+</body>
+</html>

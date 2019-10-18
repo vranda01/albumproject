@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color:#ff9999;
+    size: 150%;
+    background-position: center;
+    font-family:sans-sherif;
+}
+
+.registerbox {
+     width: 550px;
+     height: 630px;
+     background-color: #333;
+     color:white;
+     top: 50%;
+     left: 50%;
+     position: absolute;
+     transform:translate(-50%,-50%);
+     box-sizing: border-box;
+     padding: 10px 30px;
+	
+}
+
+h1 {
+    text-align: center;
+    color: whitesmoke;
+}
+
+p {
+    text-align: relative;
+    font-size: 2em;
+    color:whitesmoke;
+    font-weight:2em;
+    text-decoration-style: italic;
+}

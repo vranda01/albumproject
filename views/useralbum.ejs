@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/css/albums.css">
+  <script src="/js/album.js"></script>
+</head>
+
+<body style="background-color:#ff9999;">
+  <ul>
+    <li><a class="active" href="/useralbum">Home</a></li>
+    <li><a href="/profile"> Profile</a></li>
+    <li><a href="/updateprofile"> Update Profile</a></li>
+    <li><a href="/useralbum">Albums</a></li>
+    <li><a href="/logout">Logout</a></li>
+    <li class="right"><a href="/profile"><%= fname%> <%= lname%></a></li>
+  </ul>
+  <center>
+    <h1> Albums </h1>
+  </center>
+  <div class="form-popup" id="myForm">
+    <form action="/addalbum" class="form-container" method="post" enctype="multipart/form-data">
+      <h1>
+        <center> New Album </center>
+      </h1>
+      <hr>
+
+      <label for="albumname"><b>Album Name</b></label>
+      <input type="text" placeholder="Enter Album name" name="aname" required>
+
+      <label for="covimage"><b>Cover image</b></label>
+      <input type="file" id="input-img" name="covimage" accept="image/*" required>
+
+      <button type="submit" class="btn">Submit</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+  </div>
+  <% albums.forEach(function(album){ %>
+  <div class="gallery">
+    <a href="/addimage/<%= album._id %>">
+      <img src=<%= hostname+album.covimage %> alt=<%= album.aname %> width="500" height="300">
+    </a>
+    <div class="desc"> <%= album.aname %></div>
+  </div>
+  <%})%>
+  <center> <button onclick="openForm()"> <img src="/images/plus1.png" height=230 width=150 border=0px
+        border-color=black> </button></center>

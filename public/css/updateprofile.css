@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color:#ff9999;    
+    size: 150%;
+    background-position: center;
+    font-family:sans-sherif;
+}
+
+.profilebox {
+     width: 620px;
+     height: 690px;
+     background-color: #333;
+     color:white;
+     top: 50%;
+     left: 50%;
+     position: absolute;
+     transform:translate(-50%,-50%);
+     box-sizing: border-box;
+     padding: 50px 30px;
+	
+}
+ 
+h1 {
+    margin:0;
+    padding: 0 0 20px;
+    text-align:center;
+    font-size:22px;
+}
+
+.profilebox p{
+    margin:0;
+    padding:0;
+    font-weight:bold;
+}
+    
+.profilebox input{
+    width:100%;
+    margin-bottom:20px;
+}     
+
+.profilebox input[type="text"], input[type="password"] {
+    border:none;
+    border-bottom:1px solid #fff;
+    background:transparent;
+    outline:none;
+    height: 40px;
+    color:#fff;
+    font-size:16px;
+}
+
+.profilebox input[type="email"] {
+    border:none;
+    border-bottom:1px solid #fff;
+    background:transparent;
+    outline:none;
+    height: 40px;
+    color:#fff;
+    font-size:16px;
+}
+
+.profilebox input[type="date"] {
+    border:none;
+    border-bottom:1px solid #fff;
+    background:transparent;
+    outline:none;
+    height: 40px;
+    color:#fff;
+    font-size:16px;
+}
+
+.profilebox input[type="tel"] {
+    border:none;
+    border-bottom:1px solid #fff;
+    background:transparent;
+    outline:none;
+    height: 40px;
+    color:#fff;
+    font-size:16px;
+}
+
+.profilebox input[type"submit"] {
+    border: none; 
+    outline: none;
+    height: 200px;
+    background: white;
+    color: blue;
+    font-size:30px;
+    border-radius:60px;
+}
+

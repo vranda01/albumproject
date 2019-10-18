@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Register Page </title>
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="/css/register.css">
+<script src="/js/validation1.js"></script>
+</head>
+<body>
+<div class="registerbox">
+<img src="/images/cam.jpg" class="camera">
+<h1> Register </h1>
+<form name="myform" action="/register" method="post" onsubmit = "return validateform()">
+<p> First Name </p>
+<input type="text" name="fname" placeholder="Enter first name">
+
+<p> Last Name </p>
+<input type="text" name="lname" placeholder="Enter last name">
+
+<p> Email </p>
+<input type="email" name="email" placeholder="Enter email">
+
+<p> Password </p>
+<input type="password" name="password" placeholder="Enter password">
+
+<p> Birthdate </p>
+<input type="date" name="dob" placeholder="Enter birthdate">
+
+<p> Contact no </p>
+<input type="tel" name="con" pattern="[0-9]{10}" placeholder="9225630814">
+
+<input type="submit" name="" value="Register">
+<p style ="text-align:center;"> Already a member? <a href="/login" style=color:white;><i> Login</i></a></p>  
+<p style ="text-align:center;"> <a href="/profile" style=color:white;><i><b> Update Profile</b></i></p>
+</form>
+</div>
+</body>
+</html>
+
+
+
+
+
+
