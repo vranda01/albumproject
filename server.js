@@ -5,14 +5,15 @@ const port = 3001;
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/albumproject');
+
 
 const AlbumRouter = require('./routes/AlbumRouter');
 
 app.use(express.static('public'));
 app.use('/uploads',express.static('uploads'));
-//app.use(express.static(__dirname + '/uploads'));
 app.use(express.static(__dirname + '/images'));
 app.use(express.static(__dirname + '/js'));
 app.use(express.static(__dirname + '/css'));

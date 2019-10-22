@@ -122,25 +122,25 @@ AlbumRouter.route('/login').post(async function (req, res) {
     return true;
   }
   if (result == true) {
-    await User.findOne({ email: req.body.email, password:req.body.password}, function (err, document) {
-      console.log(document);
-      if (document) {
-        req.session.user_id = document.id;
-        req.session.fname = document.fname;
-        req.session.lname = document.lname;
-        req.session.email = document.email;
-        req.session.dob = document.dob;
-        req.session.con = document.con;
-        console.log(req.session);
-        res.redirect('/useralbum');
-      }
-      else {
-        res.redirect('/loginerror');
-      }
-    });
+    User.statics.authenticate = function (email, password, callback) {
+      User.findOne({ email: req.body.email })
+        .exec(function (err, user) {
+          if (err) {
+            return callback(err)
+          } else if (!user) {
+            res.redirect('/loginerror');
+          }
+          bcrypt.compare(password, user.password, function (err, result) {
+            if (result === true) {
+              res.redirect('/useralbum');
+            } else {
+              res.redirect('/loginerror');
+            }
+          })
+        });
+    }
   }
 });
-
 
 AlbumRouter.route('/register').post(function (req, res) {
   var fname = req.body.fname;
@@ -188,6 +188,16 @@ AlbumRouter.route('/register').post(function (req, res) {
   if (result == true) {
     const user = new User(req.body);
     console.log(user);
+    UserSchema.pre('save', function (next) {
+      var user = this;
+      bcrypt.hash(user.password, 10, function (err, hash){
+        if (err) {
+          return next(err);
+        }
+        user.password = hash;
+        next();
+      })
+    });
     user.save()
       .then(user => {
         res.redirect('/login');
