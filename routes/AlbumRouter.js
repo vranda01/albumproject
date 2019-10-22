@@ -107,22 +107,16 @@ AlbumRouter.route('/login').post(async function (req, res) {
   var result = loginvalidate(email, password);
   function loginvalidate(email, password) {
     if (email == "") {
-      return ("Please enter an email id");
-      email.focus();
+      return false;
     }
     var emailPattern = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$");
     if (!emailPattern.test(email)) {
-      return ("Please enter a valid email id");
-      email.focus();
+      return false;
     }
     if (password == "") {
-      return ("Please enter your password");
-      password.focus();
       return false;
     }
     if (password.length < 6) {
-      return ("Password should be atleast 6 characters long");
-      password.focus();
       return false;
     }
     return true;
@@ -145,9 +139,6 @@ AlbumRouter.route('/login').post(async function (req, res) {
       }
     });
   }
-  else {
-    res.send(result);
-  }
 });
 
 
@@ -161,53 +152,35 @@ AlbumRouter.route('/register').post(function (req, res) {
   var result = registervalidate(fname, lname, email, password, con, dob)
   function registervalidate(fname, lname, email, password, con, dob) {
     if (fname == "") {
-      return ("Please enter your first name.");
-      name.focus();
       return false;
     }
     if (lname == "") {
-      return ("Please enter your last name.");
-      name.focus();
       return false;
     }
     if (email == "") {
-      return ("Please enter an email id");
-      email.focus();
       return false;
     }
     var emailPattern = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$");
     if (!emailPattern.test(email)) {
-      return ("Please enter a valid email id.");
-      email.focus();
+      return false;
     }
     if (password == "") {
-      return ("Please enter your password.");
-      password.focus();
       return false;
     }
     if (password.length < 6) {
-      return ("Password should be atleast 6 charaters long.");
-      password.focus();
       return false;
     }
     if (dob == "") {
-      return ("Please enter your Birthdate.");
-      password.focus();
       return false;
     }
     if (con == "") {
-      return ("Please enter your contact number.");
-      phone.focus();
       return false;
     }
     var conPattern = new RegExp("^(\([0-9]{3}\)\s*|[0-9]{3}\-)[0-9]{3}-[0-9]{4}$");
-    if (!CONPattern.test(con)) {
-      return ("Please enter a valid contact number.");
-      email.focus();
+    if (!conPattern.test(con)) {
+      return false;
     }
     if (con.length != 10) {
-      return ("Phone number must be 10 digits.");
-      number.focus();
       return false;
     }
     return true;
@@ -223,13 +196,53 @@ AlbumRouter.route('/register').post(function (req, res) {
         res.status(400).send("unable to save to database");
       });
   }
-  else {
-    res.send(result);
-  }
 });
 
 
 AlbumRouter.route('/updateprofile').post(function (req, res) {
+  var fname = req.body.fname;
+  var lname = req.body.lname;
+  var email = req.body.email;
+  var password = req.body.password;
+  var con = req.body.con;
+  var dob = req.body.dob;
+  var result = updatevalidate(fname, lname, email, password, con, dob)
+  function updatevalidate(fname, lname, email, password, con, dob) {
+    if (fname == "") {
+      return false;
+    }
+    if (lname == "") {
+      return false;
+    }
+    if (email == "") {
+      return false;
+    }
+    var emailPattern = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$");
+    if (!emailPattern.test(email)) {
+      return false;
+    }
+    if (password == "") {
+      return false;
+    }
+    if (password.length < 6) {
+      return false;
+    }
+    if (dob == "") {
+      return false;
+    }
+    if (con == "") {
+      return false;
+    }
+    var conPattern = new RegExp("^(\([0-9]{3}\)\s*|[0-9]{3}\-)[0-9]{3}-[0-9]{4}$");
+    if (!conPattern.test(con)) {
+       return false;
+    }
+    if (con.length != 10) {
+      return false;
+    }
+    return true;
+  }
+  if (result == true) {
   User.findOne({ email: req.body.email }, function (err, document) {
     console.log(document.id);
     sess._id = document.id;
@@ -252,6 +265,7 @@ AlbumRouter.route('/updateprofile').post(function (req, res) {
       }
     });
   });
+}
 });
 
 
