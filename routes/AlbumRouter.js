@@ -122,7 +122,7 @@ AlbumRouter.route('/login').post(async function (req, res) {
     return true;
   }
   if (result == true) {
-    await User.findOne({ email: req.body.email, password: req.body.password }, function (err, document) {
+    await User.findOne({ email: req.body.email, password:req.body.password}, function (err, document) {
       console.log(document);
       if (document) {
         req.session.user_id = document.id;

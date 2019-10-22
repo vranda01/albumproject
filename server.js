@@ -5,7 +5,6 @@ const port = 3001;
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/albumproject');
 
