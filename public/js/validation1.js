@@ -1,22 +1,22 @@
 function validateform()                                    
 { 
-    var fname = document.forms["myform"]["fname"]; 
-    var lname = document.forms["myform"]["lname"];               
-    var email = document.forms["myform"]["email"];  
-    var password = document.forms["myform"]["password"];    
-    var con = document.forms["myform"]["con"];  
-    var dob = document.forms["myform"]["dob"]
-    if (fname.value == "")                                  
+    var fname = document.forms["myform"]["fname"].value; 
+    var lname = document.forms["myform"]["lname"].value;               
+    var email = document.forms["myform"]["email"].value;  
+    var password = document.forms["myform"]["password"].value;    
+    var con = document.forms["myform"]["con"].value;  
+    var dob = document.forms["myform"]["dob"].value;
+    if (fname == "")                                  
     { 
         window.alert("Please enter your first name.");
         return false; 
     } 
-   if (lname.value == "")                                  
+   if (lname == "")                                  
     { 
         window.alert("Please enter your last name."); 
         return false; 
     }
-       if (email.value == "")
+       if (email == "")
     {
          window.alert("Please enter an email id");
          return false;
@@ -28,22 +28,22 @@ function validateform()
         window.alert("Please enter a valid email id.");
         return false;
      }
-    if (password.value == "")                        
+    if (password == "")                        
     { 
         window.alert("Please enter your password.");  
         return false; 
     } 
-    if (password.value.length < 6)                        
+    if (password.length < 6)                        
     { 
         window.alert("Password should be atleast 6 charaters long."); 
         return false; 
     } 
-    if (dob.value == "")                        
+    if (dob == "")                        
     { 
         window.alert("Please enter your Birthdate."); 
         return false; 
     } 
-     if (con.value == "")                           
+     if (con == "")                           
      { 
         window.alert("Please enter your contact number."); 
         return false; 
@@ -55,7 +55,7 @@ function validateform()
         window.alert("Please enter a valid contact number.");
         return false;
       }
-   if(con.value.length != 10) 
+   if(con.length != 10) 
    {
     window.alert("Phone number must be 10 digits.");
     return false;

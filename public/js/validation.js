@@ -1,9 +1,9 @@
 function validateform() {
-   var email = document.forms["myform"]["email"];
-   var password = document.forms["myform"]["password"];
+   var email = document.forms["myform"]["email"].value;
+   var password = document.forms["myform"]["password"].value;
    var emailPattern = "/[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$/";
    var test = emailPattern.test(email);
-   if (email.value == "") {
+   if (email == "") {
       window.alert("Please enter an email id");
       return false;
    }
@@ -11,11 +11,11 @@ function validateform() {
       window.alert("Please enter a valid email id");
       return false;
    }
-   if (password.value == "") {
+   if (password == "") {
       window.alert("Please enter your password");
       return false;
    }
-   if (password.value.length < 6) {
+   if (password.length < 6) {
       window.alert("Password should be atleast 6 characters long");
       return false;
    }
