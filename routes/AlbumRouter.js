@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const AlbumRouter = express.Router();
 const Bcrypt = require("bcryptjs");
-var exec = require('exec');
 const multer = require('multer');
 storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -104,7 +103,7 @@ AlbumRouter.route('/logout').get(function (req, res) {
 
 //POST ROUTES
 AlbumRouter.route('/login').post(async function (req, res) {
-    var user = await User.findOne({ email: req.body.email }).exec();
+    var user = await User.findOne({ email: req.body.email });
     if (!user) {
       res.redirect('/loginerror');
     }
