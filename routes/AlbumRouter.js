@@ -159,7 +159,6 @@ AlbumRouter.route('/register').post(function (req, res) {
   var password = req.body.password;
   var con = req.body.con;
   var dob = req.body.dob;
-<<<<<<< HEAD
   const user = new User(req.body);
   console.log(user);
   user.save()
@@ -169,18 +168,6 @@ AlbumRouter.route('/register').post(function (req, res) {
     .catch(err => {
       res.status(400).send("unable to save to database");
     });
-=======
-  req.body.password = Bcrypt.hashSync(req.body.password, 10);
-    const user = new User(req.body);
-    console.log(user);
-    user.save()
-      .then(user => {
-        res.redirect('/login');
-      })
-      .catch(err => {
-        res.status(400).send("unable to save to database");
-      });
->>>>>>> changes
 });
 
 
