@@ -159,6 +159,7 @@ AlbumRouter.route('/register').post(function (req, res) {
   var password = req.body.password;
   var con = req.body.con;
   var dob = req.body.dob;
+  req.body.password = Bcrypt.hashSync(req.body.password, 10);
   const user = new User(req.body);
   console.log(user);
   user.save()
