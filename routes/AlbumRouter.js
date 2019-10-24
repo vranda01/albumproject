@@ -112,24 +112,6 @@ AlbumRouter.route('/login').post(async function (req, res) {
     }
      res.redirect('/useralbum');
 });
-//     await User.findOne({ email: req.body.email, password:req.body.password}, function (err, document) {
-//       console.log(document);
-//       if (document) {
-//         req.session.user_id = document.id;
-//         req.session.fname = document.fname;
-//         req.session.lname = document.lname;
-//         req.session.email = document.email;
-//         req.session.dob = document.dob;
-//         req.session.con = document.con;
-//         console.log(req.session);
-//         res.redirect('/useralbum');
-//       }
-//       else {
-//         res.redirect('/loginerror');
-//       }
-//     });
-//   }
-// });
 
 AlbumRouter.route('/register').post(function (req, res) {
   var fname = req.body.fname;
