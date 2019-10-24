@@ -103,26 +103,6 @@ AlbumRouter.route('/logout').get(function (req, res) {
 
 //POST ROUTES
 AlbumRouter.route('/login').post(async function (req, res) {
-  // var email = req.body.email;
-  // var password = req.body.password;
-  // var result = loginvalidate(email, password);
-  // function loginvalidate(email, password) {
-  //   if (email == "") {
-  //     return false;
-  //   }
-  //   var emailPattern = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$");
-  //   if (!emailPattern.test(email)) {
-  //     return false;
-  //   }
-  //   if (password == "") {
-  //     return false;
-  //   }
-  //   if (password.length < 6) {
-  //     return false;
-  //   }
-  //   return true;
-  // }
-  // if (result == true) {
     var user = await User.findOne({ email: req.body.email }).exec();
     if (!user) {
       res.redirect('/loginerror');
@@ -131,7 +111,6 @@ AlbumRouter.route('/login').post(async function (req, res) {
       res.redirect('/loginerror');
     }
      res.redirect('/useralbum');
-  //}
 });
 //     await User.findOne({ email: req.body.email, password:req.body.password}, function (err, document) {
 //       console.log(document);
@@ -189,7 +168,7 @@ AlbumRouter.route('/updateprofile').post(function (req, res) {
         user.fname = req.body.fname;
         user.lname = req.body.lname;
         user.email = req.body.email;
-        user.password = req.body.password;
+        user.password = Bcrypt.hashSync(req.body.password, 10);
         user.dob = req.body.dob;
         user.con = req.body.con;
         user.save().then(user => {
