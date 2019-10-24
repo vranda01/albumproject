@@ -104,32 +104,21 @@ AlbumRouter.route('/logout').get(function (req, res) {
 //POST ROUTES
 AlbumRouter.route('/login').post(async function (req, res) {
     var user = await User.findOne({ email: req.body.email });
+    console.log(user);
     if (!user) {
       res.redirect('/loginerror');
     }
     if (!Bcrypt.compareSync(req.body.password, user.password)) {
       res.redirect('/loginerror');
     }
-     res.redirect('/useralbum');
+    req.session.user_id = user.id;
+        req.session.fname = user.fname;
+        req.session.lname = user.lname;
+        req.session.email = user.email;
+        req.session.dob = user.dob;
+        req.session.con = user.con;
+        res.redirect('/useralbum');
 });
-//     await User.findOne({ email: req.body.email, password:req.body.password}, function (err, document) {
-//       console.log(document);
-//       if (document) {
-//         req.session.user_id = document.id;
-//         req.session.fname = document.fname;
-//         req.session.lname = document.lname;
-//         req.session.email = document.email;
-//         req.session.dob = document.dob;
-//         req.session.con = document.con;
-//         console.log(req.session);
-//         res.redirect('/useralbum');
-//       }
-//       else {
-//         res.redirect('/loginerror');
-//       }
-//     });
-//   }
-// });
 
 
 AlbumRouter.route('/register').post(function (req, res) {
