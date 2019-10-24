@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const AlbumRouter = express.Router();
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const multer = require('multer');
 storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -141,7 +143,6 @@ AlbumRouter.route('/login').post(async function (req, res) {
   }
 });
 
-
 AlbumRouter.route('/register').post(function (req, res) {
   var fname = req.body.fname;
   var lname = req.body.lname;
@@ -149,53 +150,15 @@ AlbumRouter.route('/register').post(function (req, res) {
   var password = req.body.password;
   var con = req.body.con;
   var dob = req.body.dob;
-  var result = registervalidate(fname, lname, email, password, con, dob)
-  function registervalidate(fname, lname, email, password, con, dob) {
-    if (fname == "") {
-      return false;
-    }
-    if (lname == "") {
-      return false;
-    }
-    if (email == "") {
-      return false;
-    }
-    var emailPattern = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$");
-    if (!emailPattern.test(email)) {
-      return false;
-    }
-    if (password == "") {
-      return false;
-    }
-    if (password.length < 6) {
-      return false;
-    }
-    if (dob == "") {
-      return false;
-    }
-    if (con == "") {
-      return false;
-    }
-    var conPattern = new RegExp("^(\([0-9]{3}\)\s*|[0-9]{3}\-)[0-9]{3}-[0-9]{4}$");
-    if (!conPattern.test(con)) {
-      return false;
-    }
-    if (con.length != 10) {
-      return false;
-    }
-    return true;
-  }
-  if (result == true) {
-    const user = new User(req.body);
-    console.log(user);
-    user.save()
-      .then(user => {
-        res.redirect('/login');
-      })
-      .catch(err => {
-        res.status(400).send("unable to save to database");
-      });
-  }
+  const user = new User(req.body);
+  console.log(user);
+  user.save()
+    .then(user => {
+      res.redirect('/login');
+    })
+    .catch(err => {
+      res.status(400).send("unable to save to database");
+    });
 });
 
 
@@ -206,43 +169,6 @@ AlbumRouter.route('/updateprofile').post(function (req, res) {
   var password = req.body.password;
   var con = req.body.con;
   var dob = req.body.dob;
-  var result = updatevalidate(fname, lname, email, password, con, dob)
-  function updatevalidate(fname, lname, email, password, con, dob) {
-    if (fname == "") {
-      return false;
-    }
-    if (lname == "") {
-      return false;
-    }
-    if (email == "") {
-      return false;
-    }
-    var emailPattern = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$");
-    if (!emailPattern.test(email)) {
-      return false;
-    }
-    if (password == "") {
-      return false;
-    }
-    if (password.length < 6) {
-      return false;
-    }
-    if (dob == "") {
-      return false;
-    }
-    if (con == "") {
-      return false;
-    }
-    var conPattern = new RegExp("^(\([0-9]{3}\)\s*|[0-9]{3}\-)[0-9]{3}-[0-9]{4}$");
-    if (!conPattern.test(con)) {
-       return false;
-    }
-    if (con.length != 10) {
-      return false;
-    }
-    return true;
-  }
-  if (result == true) {
   User.findOne({ email: req.body.email }, function (err, document) {
     console.log(document.id);
     sess._id = document.id;
@@ -265,7 +191,6 @@ AlbumRouter.route('/updateprofile').post(function (req, res) {
       }
     });
   });
-}
 });
 
 
