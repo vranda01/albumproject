@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const AlbumRouter = express.Router();
 const Bcrypt = require("bcryptjs");
+var exec = require('exec');
 const multer = require('multer');
 storage = multer.diskStorage({
   destination: function (req, file, cb) {
