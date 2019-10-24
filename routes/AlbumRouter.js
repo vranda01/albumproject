@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const AlbumRouter = express.Router();
+const Bcrypt = require("bcryptjs");
 const multer = require('multer');
 storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -102,44 +103,54 @@ AlbumRouter.route('/logout').get(function (req, res) {
 
 //POST ROUTES
 AlbumRouter.route('/login').post(async function (req, res) {
-  var email = req.body.email;
-  var password = req.body.password;
-  var result = loginvalidate(email, password);
-  function loginvalidate(email, password) {
-    if (email == "") {
-      return false;
+  // var email = req.body.email;
+  // var password = req.body.password;
+  // var result = loginvalidate(email, password);
+  // function loginvalidate(email, password) {
+  //   if (email == "") {
+  //     return false;
+  //   }
+  //   var emailPattern = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$");
+  //   if (!emailPattern.test(email)) {
+  //     return false;
+  //   }
+  //   if (password == "") {
+  //     return false;
+  //   }
+  //   if (password.length < 6) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
+  // if (result == true) {
+    var user = await User.findOne({ email: req.body.email }).exec();
+    if (!user) {
+      res.redirect('/loginerror');
     }
-    var emailPattern = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$");
-    if (!emailPattern.test(email)) {
-      return false;
+    if (!Bcrypt.compareSync(req.body.password, user.password)) {
+      res.redirect('/loginerror');
     }
-    if (password == "") {
-      return false;
-    }
-    if (password.length < 6) {
-      return false;
-    }
-    return true;
-  }
-  if (result == true) {
-    await User.findOne({ email: req.body.email, password:req.body.password}, function (err, document) {
-      console.log(document);
-      if (document) {
-        req.session.user_id = document.id;
-        req.session.fname = document.fname;
-        req.session.lname = document.lname;
-        req.session.email = document.email;
-        req.session.dob = document.dob;
-        req.session.con = document.con;
-        console.log(req.session);
-        res.redirect('/useralbum');
-      }
-      else {
-        res.redirect('/loginerror');
-      }
-    });
-  }
+     res.redirect('/useralbum');
+  //}
 });
+//     await User.findOne({ email: req.body.email, password:req.body.password}, function (err, document) {
+//       console.log(document);
+//       if (document) {
+//         req.session.user_id = document.id;
+//         req.session.fname = document.fname;
+//         req.session.lname = document.lname;
+//         req.session.email = document.email;
+//         req.session.dob = document.dob;
+//         req.session.con = document.con;
+//         console.log(req.session);
+//         res.redirect('/useralbum');
+//       }
+//       else {
+//         res.redirect('/loginerror');
+//       }
+//     });
+//   }
+// });
 
 AlbumRouter.route('/register').post(function (req, res) {
   var fname = req.body.fname;
@@ -148,6 +159,7 @@ AlbumRouter.route('/register').post(function (req, res) {
   var password = req.body.password;
   var con = req.body.con;
   var dob = req.body.dob;
+<<<<<<< HEAD
   const user = new User(req.body);
   console.log(user);
   user.save()
@@ -157,6 +169,18 @@ AlbumRouter.route('/register').post(function (req, res) {
     .catch(err => {
       res.status(400).send("unable to save to database");
     });
+=======
+  req.body.password = Bcrypt.hashSync(req.body.password, 10);
+    const user = new User(req.body);
+    console.log(user);
+    user.save()
+      .then(user => {
+        res.redirect('/login');
+      })
+      .catch(err => {
+        res.status(400).send("unable to save to database");
+      });
+>>>>>>> changes
 });
 
 
